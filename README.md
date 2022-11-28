@@ -58,7 +58,6 @@ Exemplo de processo:
   dateEnd: "",
   setor: "tre"
 },
-,
 {
   id: "ee5999d7-02e9-4b3d-a1ab-f067eef54173",
   documentName: "Licitação Compras - Ar Condicionado",
