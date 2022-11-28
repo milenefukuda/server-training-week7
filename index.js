@@ -29,7 +29,6 @@ const db = [
   },
 ];
 
-// ITERAÇÃO 1
 //criação das rotas
 app.get("/all-users", (req, res) => {
   console.log(req.url);
