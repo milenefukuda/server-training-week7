@@ -87,7 +87,7 @@ Exemplo de processo:
 - Crie uma rota que busque todos os processos de um determinado setor
 
   - `Rota: "/setor/:nomeSetor"`
-  - `exemplo: "/setor/TRE" `
+  - `exemplo: "/setor/tre" `
 
 - Crie um rota que devolva um processo escolhido aleatoriamente.
 
