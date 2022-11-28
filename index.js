@@ -14,11 +14,24 @@ const app = express();
 app.use(express.json());
 
 //banco de dados que usaremos de exemplo
-const db = [];
+const db = [
+  {
+    id: uuidv4(),
+    user: "karen",
+    age: 29,
+    role: "professora",
+    active: true,
+    endereco: {
+      cidade: "ribas do rio pardo",
+      estado: "MS",
+    },
+    tarefas: ["fazer a próxima aula", "atualizar portal"],
+  },
+];
 
 // ITERAÇÃO 1
 //criação das rotas
-app.get("/all", (req, res) => {
+app.get("/all-users", (req, res) => {
   console.log(req.url);
   console.log(req.method);
 
@@ -27,7 +40,7 @@ app.get("/all", (req, res) => {
     .json({ messagem: "Bem vindo ao servidor da turma 91 - ENAP", data: db });
 });
 
-app.post("/create", (req, res) => {
+app.post("/newUser", (req, res) => {
   console.log(req.body);
 
   let form = { ...req.body, id: uuidv4() };
@@ -40,7 +53,7 @@ app.post("/create", (req, res) => {
   });
 });
 
-app.get("/:id", (req, res) => {
+app.get("/user/:id", (req, res) => {
   const { id } = req.params;
   console.log(id);
 
@@ -57,7 +70,6 @@ app.delete("/deleteUser/:id", (req, res) => {
   const { id } = req.params;
 
   const deleteById = db.find((user) => user.id === id);
-  console.log(deleteById);
 
   const index = db.indexOf(deleteById);
 
@@ -83,15 +95,18 @@ app.put("/editUser/:id", (req, res) => {
 
 app.put("/addTarefa/:id", (req, res) => {
   const { id } = req.params;
+  const tarefa = req.body.tarefa;
 
   const user = db.find((user) => user.id === id);
   const index = db.indexOf(user);
 
-  const update = db[index].tarefas.push(req.body.tarefa);
+  const update = db[index].tarefas.push(tarefa);
 
   return res.status(201).json(update);
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("App up and running on port: http://localhost:8080");
+  console.log(
+    `App up and running on port: http://localhost:${process.env.PORT}`
+  );
 });
